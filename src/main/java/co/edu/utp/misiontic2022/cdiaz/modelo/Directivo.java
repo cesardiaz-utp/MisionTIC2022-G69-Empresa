@@ -1,16 +1,15 @@
 package co.edu.utp.misiontic2022.cdiaz.modelo;
 
-import co.edu.utp.misiontic2022.cdiaz.excepciones.MaximoNumeroSubordinadosException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Directivo extends Empleado {
 
     private static final String CATEGORIA_POR_DEFECTO = "No asignado";
-    private static final Integer CANTIDAD_SUBORDINADOS = 2;
     
     private String categoria;
 
-    private Empleado[] subordinados;
-    private Integer numSubordinados;
+    private List<Empleado> subordinados;
 
     public Directivo(String nombre, Integer edad) {
         this(nombre, edad, SUELDO_POR_DEFECTO);
@@ -28,8 +27,7 @@ public class Directivo extends Empleado {
         super(nombre, edad, sueldoBruto);
         this.categoria = categoria;
 
-        this.subordinados = new Empleado[CANTIDAD_SUBORDINADOS];
-        this.numSubordinados = 0;
+        this.subordinados = new ArrayList<>();
     }
 
     public String getCategoria() {
@@ -40,16 +38,12 @@ public class Directivo extends Empleado {
         this.categoria = categoria;
     }
 
-    public Empleado[] getSubordinados() {
+    public List<Empleado> getSubordinados() {
         return subordinados;
     }
 
     public void agregarSubordinado(Empleado empleado) {
-        if (numSubordinados >= CANTIDAD_SUBORDINADOS) {
-            throw new MaximoNumeroSubordinadosException();
-        }
-
-        subordinados[numSubordinados++] = empleado;
+        subordinados.add(empleado);
     }
 
     @Override

@@ -1,6 +1,6 @@
 package co.edu.utp.misiontic2022.cdiaz.modelo;
 
-public class Empleado extends Persona {
+public class Empleado extends Persona  {
 
     protected static final Double SUELDO_POR_DEFECTO = 1_000_000d;
 
@@ -36,4 +36,5 @@ public class Empleado extends Persona {
 
         return getSueldoBruto() * (100 - porcentajeSalud - porcentajePension) / 100;
     }
+
 }

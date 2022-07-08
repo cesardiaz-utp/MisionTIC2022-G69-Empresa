@@ -1,55 +1,48 @@
 package co.edu.utp.misiontic2022.cdiaz.modelo;
 
-import co.edu.utp.misiontic2022.cdiaz.excepciones.MaximoNumeroClientesException;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class Empresa {
     
-    private static final Integer CANTIDAD_CLIENTES = 1;
-
     private String nombre;
 
-    private Empleado[] empleados;
+    private Set<Empleado> empleados;
 
-    private Cliente[] clientes;
-    private Integer numClientes;
+    private Set<Cliente> clientes;
 
-    public Empresa(String nombre, Empleado[] empleados) {
+    public Empresa(String nombre, Set<Empleado> empleados) {
         this.nombre = nombre;
         this.empleados = empleados;
 
-        this.clientes = new Cliente[CANTIDAD_CLIENTES];
-        this.numClientes = 0;
+        this.clientes = new TreeSet<>();
     }
 
     public String getNombre() {
         return nombre;
     }
 
-    public Empleado[] getEmpleados() {
+    public Set<Empleado> getEmpleados() {
         return empleados;
     }
 
-    public Cliente[] getClientes() {
+    public Set<Cliente> getClientes() {
         return clientes;
     }
 
-    public void agregarCliente(Cliente cliente) throws MaximoNumeroClientesException {
-        // Valido
-        if (numClientes >= CANTIDAD_CLIENTES) {
-            var ex = new MaximoNumeroClientesException("La empresa no puede agregar un cliente más");
-            try {
-                ex.doIo2(System.in, System.out);
-            } catch (Throwable e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-            throw ex;
-        }
-
-        // Proceso
-        clientes[numClientes] = cliente;
-        numClientes++;
+    public void agregarCliente(Cliente cliente) {
+        clientes.add(cliente);
     }
 
+    public void eliminarCliente(Cliente cliente) {
+        clientes.remove(cliente);
+
+        // var pos = clientes.indexOf(cliente);
+        // if (pos != -1) {
+        //     clientes.remove(pos);
+        // } else {
+        //     throw new RuntimeException("El cliente no pertenece a esta empresa");
+        // }
+    }
     
 }
